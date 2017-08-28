@@ -43,11 +43,16 @@ class ViewController: UIViewController {
                 if (isKeybaordShowing){
                     let lastItem = self.chatArray.count - 1
                     let indexPath = IndexPath(item: lastItem, section: 0)
-                    self.tblChat.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+                    self.tblChat.scrollToRow(at: indexPath, at: .bottom, animated: true)
                 }
             })
 
         }
+    }
+    
+    
+    @IBAction func sendMsg(_ sender: Any) {
+        
     }
 
     override func didReceiveMemoryWarning() {

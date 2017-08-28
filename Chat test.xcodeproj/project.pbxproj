@@ -15,6 +15,10 @@
 		051248151F540B0700FAA779 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 051248131F540B0700FAA779 /* LaunchScreen.storyboard */; };
 		0512481D1F5419A100FAA779 /* FromChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512481C1F5419A000FAA779 /* FromChatTableViewCell.swift */; };
 		0512481F1F5419CC00FAA779 /* ToChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0512481E1F5419CC00FAA779 /* ToChatTableViewCell.swift */; };
+		051248241F54496A00FAA779 /* Messages+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248201F54496900FAA779 /* Messages+CoreDataClass.swift */; };
+		051248251F54496A00FAA779 /* Messages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */; };
+		051248261F54496A00FAA779 /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248221F54496A00FAA779 /* Users+CoreDataClass.swift */; };
+		051248271F54496A00FAA779 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +32,10 @@
 		051248161F540B0700FAA779 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0512481C1F5419A000FAA779 /* FromChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FromChatTableViewCell.swift; sourceTree = "<group>"; };
 		0512481E1F5419CC00FAA779 /* ToChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToChatTableViewCell.swift; sourceTree = "<group>"; };
+		051248201F54496900FAA779 /* Messages+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Messages+CoreDataClass.swift"; path = "../Messages+CoreDataClass.swift"; sourceTree = "<group>"; };
+		051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Messages+CoreDataProperties.swift"; path = "../Messages+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		051248221F54496A00FAA779 /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Users+CoreDataClass.swift"; path = "../Users+CoreDataClass.swift"; sourceTree = "<group>"; };
+		051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Users+CoreDataProperties.swift"; path = "../Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +72,10 @@
 				051248091F540B0700FAA779 /* ViewController.swift */,
 				0512481C1F5419A000FAA779 /* FromChatTableViewCell.swift */,
 				0512481E1F5419CC00FAA779 /* ToChatTableViewCell.swift */,
+				051248201F54496900FAA779 /* Messages+CoreDataClass.swift */,
+				051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */,
+				051248221F54496A00FAA779 /* Users+CoreDataClass.swift */,
+				051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */,
 				051248051F540B0600FAA779 /* Products */,
 				0512480B1F540B0700FAA779 /* Main.storyboard */,
 				051248111F540B0700FAA779 /* Assets.xcassets */,
@@ -148,6 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0512480A1F540B0700FAA779 /* ViewController.swift in Sources */,
+				051248271F54496A00FAA779 /* Users+CoreDataProperties.swift in Sources */,
+				051248241F54496A00FAA779 /* Messages+CoreDataClass.swift in Sources */,
+				051248261F54496A00FAA779 /* Users+CoreDataClass.swift in Sources */,
+				051248251F54496A00FAA779 /* Messages+CoreDataProperties.swift in Sources */,
 				0512481D1F5419A100FAA779 /* FromChatTableViewCell.swift in Sources */,
 				051248101F540B0700FAA779 /* Chat_test.xcdatamodeld in Sources */,
 				051248081F540B0700FAA779 /* AppDelegate.swift in Sources */,

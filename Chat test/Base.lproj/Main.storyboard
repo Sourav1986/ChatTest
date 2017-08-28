@@ -171,6 +171,9 @@
                                             <constraint firstAttribute="height" constant="30" id="XSm-7J-pFR"/>
                                         </constraints>
                                         <state key="normal" backgroundImage="send"/>
+                                        <connections>
+                                            <action selector="sendMsg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="EVD-vg-ecC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
