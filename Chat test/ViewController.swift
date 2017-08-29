@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ViewController: UIViewController {
 
@@ -16,16 +17,30 @@ class ViewController: UIViewController {
     @IBOutlet weak var tblChat: UITableView!
     @IBOutlet weak var inputFieldView: UIView!
     @IBOutlet weak var inputViewButtom: NSLayoutConstraint!
+    var chatArray = [Messages]()
+    var selfUser:Users?
+    var otherUser:Users?
     
-    var chatArray = [[AnyHashable:Any]]()
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tblChat.estimatedRowHeight = 69.0
         tblChat.rowHeight = UITableViewAutomaticDimension
+ 
+        do {
+            try CheckAndCreateUsers()
+        } catch  {
+            print(error.localizedDescription)
+        }
         
-        chatArray = [["type":"1","msg":"Hi,how are you?"],["type":"0","msg":"Fine!"]]
+       // chatArray = [["type":"1","msg":"Hi,how are you?"],["type":"0","msg":"Fine!"]]
+        do {
+            try fetchMessage()
+        } catch  {
+            print(error.localizedDescription)
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard(sender:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard(sender:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -41,17 +56,73 @@ class ViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }, completion: { (completed) in
                 if (isKeybaordShowing){
-                    let lastItem = self.chatArray.count - 1
-                    let indexPath = IndexPath(item: lastItem, section: 0)
-                    self.tblChat.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    if self.chatArray.count > 0 {
+                        let lastItem = self.chatArray.count - 1
+                        let indexPath = IndexPath(item: lastItem, section: 0)
+                        self.tblChat.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    }
+                   
                 }
             })
 
         }
     }
     
+    func CheckAndCreateUsers() throws {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return  }
+        let manageedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequestforself = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+        fetchRequestforself.predicate = NSPredicate(format: "username == %@", "me@chat")
+        
+        let users = try manageedObjectContext.fetch(fetchRequestforself) as! [Users]
+        
+        if users.count == 0 {
+            let entity = NSEntityDescription.entity(forEntityName: "Users", in: manageedObjectContext)
+            let newRecord = Users(entity: entity!, insertInto: manageedObjectContext)
+            newRecord.name = "Sourav"
+            newRecord.password = "abcd"
+            newRecord.username = "me@chat"
+            try manageedObjectContext.save()
+            
+        }
+        else{
+            selfUser = users.last
+        }
+        
+        let fetchRequestforothers = NSFetchRequest<NSFetchRequestResult>(entityName: "Users")
+        fetchRequestforothers.predicate = NSPredicate(format: "username == %@", "other@chat")
+        
+        let others = try manageedObjectContext.fetch(fetchRequestforself) as! [Users]
+        
+        if others.count == 0 {
+            let entity = NSEntityDescription.entity(forEntityName: "Users", in: manageedObjectContext)
+            let newRecord = Users(entity: entity!, insertInto: manageedObjectContext)
+            newRecord.name = "Anna"
+            newRecord.password = "abcd"
+            newRecord.username = "other@chat"
+            try manageedObjectContext.save()
+            
+        }
+        else{
+            otherUser = others.last
+        }
+
+
+    }
+    
     
     @IBAction func sendMsg(_ sender: Any) {
+        guard let message = txtInputField.text,message.characters.count > 0 else {
+            shakeAnimation(view: txtInputField)
+            return
+        }
+        
+        do {
+            try SaveMessage(msgString: message)
+        } catch  {
+            print(error.localizedDescription)
+        }
         
     }
 
@@ -59,7 +130,49 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func SaveMessage(msgString:String) throws {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return  }
+        let manageedObjectContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Messages")
+        
+        let messages = try manageedObjectContext.fetch(fetchRequest) as! [Messages]
+        
+        let entity = NSEntityDescription.entity(forEntityName: "Messages", in: manageedObjectContext)
+        let newRecord = Messages(entity: entity!, insertInto: manageedObjectContext)
+        
+        var messageid = "msg\(1)"
+        if messages.count > 0 {
+            if let lastobject = messages.last {
+                if let index = messages.index(of: lastobject) {
+                    messageid = "msg\(index + 1)"
+                }
+                
+            }
 
+        }
+        newRecord.msgid = messageid
+        newRecord.msg = msgString
+        if let me = selfUser {
+            newRecord.message = me
+        }
+        newRecord.type = 0
+        try manageedObjectContext.save()
+        try fetchMessage()
+    }
+    
+    func fetchMessage() throws {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return  }
+        let manageContext = appDelegate.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Messages")
+        
+        let messages = try manageContext.fetch(fetchRequest) as! [Messages]
+        if messages.count > 0 {
+            chatArray = messages
+        }
+        tblChat.reloadData()
+    }
 
 }
 
@@ -72,10 +185,10 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate,UITextFieldDe
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let chatData = chatArray[indexPath.row]
-        let chatType = chatData["type"] as? String ?? ""
-        if chatType == "1" {
+        let chatType = chatData.type
+        if chatType == 1 {
             let cellType1 = tableView.dequeueReusableCell(withIdentifier: "fromcell", for: indexPath) as! FromChatTableViewCell
-            let chatString = chatData["msg"] as? String ?? ""
+            let chatString = chatData.msg ?? ""
             
             let size = CGSize(width: 250, height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
@@ -90,7 +203,7 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate,UITextFieldDe
         }
         else{
             let cellType2 = tableView.dequeueReusableCell(withIdentifier: "tocell", for: indexPath) as! ToChatTableViewCell
-            let chatString = chatData["msg"] as? String ?? ""
+            let chatString = chatData.msg ?? ""
             let size = CGSize(width: 250, height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: chatString).boundingRect(with: size, options: options, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 18)], context: nil)

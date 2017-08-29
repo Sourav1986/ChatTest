@@ -19,6 +19,7 @@
 		051248251F54496A00FAA779 /* Messages+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */; };
 		051248261F54496A00FAA779 /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248221F54496A00FAA779 /* Users+CoreDataClass.swift */; };
 		051248271F54496A00FAA779 /* Users+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */; };
+		33BCD98A1F5532C2006C9C6A /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BCD9891F5532C2006C9C6A /* Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Messages+CoreDataProperties.swift"; path = "../Messages+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		051248221F54496A00FAA779 /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Users+CoreDataClass.swift"; path = "../Users+CoreDataClass.swift"; sourceTree = "<group>"; };
 		051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Users+CoreDataProperties.swift"; path = "../Users+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		33BCD9891F5532C2006C9C6A /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				051248211F54496A00FAA779 /* Messages+CoreDataProperties.swift */,
 				051248221F54496A00FAA779 /* Users+CoreDataClass.swift */,
 				051248231F54496A00FAA779 /* Users+CoreDataProperties.swift */,
+				33BCD9891F5532C2006C9C6A /* Utility.swift */,
 				051248051F540B0600FAA779 /* Products */,
 				0512480B1F540B0700FAA779 /* Main.storyboard */,
 				051248111F540B0700FAA779 /* Assets.xcassets */,
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BCD98A1F5532C2006C9C6A /* Utility.swift in Sources */,
 				0512480A1F540B0700FAA779 /* ViewController.swift in Sources */,
 				051248271F54496A00FAA779 /* Users+CoreDataProperties.swift in Sources */,
 				051248241F54496A00FAA779 /* Messages+CoreDataClass.swift in Sources */,
@@ -333,6 +337,7 @@
 				0512481B1F540B0700FAA779 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
